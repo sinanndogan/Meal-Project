@@ -4,14 +4,20 @@
             {{ letter }}
         </router-link>
     </div>
+
+    <div>
+        <pre>{{ meals }}</pre>
+    </div>
 </template>
 
 
 <script setup>
 import store from '../store';
+import {computed} from '@vue/reactivity'
+
+
 
 const letters='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split("");
-
 const meals =computed(()=>store.state.mealsByLetter)
 
 
