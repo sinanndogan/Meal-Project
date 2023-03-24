@@ -1,5 +1,5 @@
 <template>
-    <div  class="bg-white shadow rounded-xl">
+    <div  class="bg-white shadow rounded-xl hover:scale-105 transition-all">
        <router-link :to="{name:'mealDetails', params:{id: meal.idMeal}}"> 
         <img :src="meal.strMealThumb" :alt="meal.strMeal" class="rounded-t-xl w-full h-72 object-cover">
        </router-link>
@@ -15,8 +15,13 @@
 
 
 <script setup>
+import YoutubeButton from './YoutubeButton.vue';
+
 
 const{meal} =defineProps ({
-    meal: Object
+    meal: {
+        required:true,
+        type: Object
+    }
 })
 </script>

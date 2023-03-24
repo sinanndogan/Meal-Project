@@ -5,22 +5,34 @@
         </router-link>
     </div>
 
-    <div>
-        <pre>{{ meals }}</pre>
-    </div>
+  <Meals :meals="meals"/>
+
 </template>
 
 
 <script setup>
 import store from '../store';
 import {computed} from '@vue/reactivity'
+import { useRoute } from 'vue-router';
+import { onMounted,watch } from 'vue';
+import MealItem from '../components/MealItem.vue';
+import Meals from '../components/Meals.vue'
 
 
-
+const route=useRoute();
 const letters='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split("");
 const meals =computed(()=>store.state.mealsByLetter)
 
 
+//Harflerin üzerine tıkladıgım zaman gelen menüler bu watch fonk sayesinde 
+watch(route, ()=> {
+    store.dispatch('searchMealsByLetter',route.params.letter)
+})
+
+
+onMounted(()=>{
+    store.dispatch('searchMealsByLetter',route.params.letter)
+})
 
 
 </script>
